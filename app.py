@@ -2,42 +2,40 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-listaCompras = []
+shopping_list = []
 
-@app.route('/listaCompras/view', methods=["GET"])
+@app.route('/shopping_list/view', methods=["GET"])
 def view_list():
     product_list = []
-    for product in listaCompras:
+    for product in shopping_list:
         product_data = {
-            "nomeProduto": product["nomeProduto"],
-            "quantidade": product["quantidade"],
-            "precoUnidade": product["precoUnidade"]
+            "productName": product["productName"],
+            "quantity": product["quantity"],
+            "unitPrice": product["unitPrice"]
         }
 
         product_list.append(product_data)
 
     return jsonify(product_list)
 
-
-
-@app.route('/listaCompras/add', methods=["POST"])
-def adc_product():
-     #variavel para receber dados da minha requisicao
+@app.route('/shopping_list/add', methods=["POST"])
+def add_product():
+     #variable to receive data from the request
     data = request.json
 
-#isinstance = garantias de que o tipo de dado recebido é o esperado.
+    # isinstance = ensures that the received data type is as expected.
     if (
-        "nomeProduto" in data and isinstance(data["quantidade"], int) 
-        and data["quantidade"] > 0 and isinstance(data["precoUnidade"], (int, float)) 
-        and data["precoUnidade"] > 0):
-            #criar produto e salvar na lista
+        "productName" in data and isinstance(data["quantity"], int) 
+        and data["quantity"] > 0 and isinstance(data["unitPrice"], (int, float)) 
+        and data["unitPrice"] > 0):
+            #create product and save to the list
             product = {
-                "nomeProduto": data["nomeProduto"],
-                "quantidade": data["quantidade"],
-                "precoUnidade": data["precoUnidade"]
+                "productName": data["productName"],
+                "quantity": data["quantity"],
+                "unitPrice": data["unitPrice"]
             }
 
-            listaCompras.append(product)
+            shopping_list.append(product)
             return jsonify({"message": "Product successfully registered.", "product": product}), 201
     return jsonify({"message": "Invalid product data"}), 400
 

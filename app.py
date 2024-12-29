@@ -1,4 +1,15 @@
 from flask import Flask, request, jsonify
+from supabase import create_client, Client
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
 
 app = Flask(__name__)
 
@@ -6,17 +17,9 @@ shopping_list = []
 
 @app.route('/shopping_list/view', methods=["GET"])
 def view_list():
-    product_list = []
-    for product in shopping_list:
-        product_data = {
-            "productName": product["productName"],
-            "quantity": product["quantity"],
-            "unitPrice": product["unitPrice"]
-        }
+    response = supabase.table("products").select("*").execute()
+    return jsonify(response.data), 200
 
-        product_list.append(product_data)
-
-    return jsonify(product_list)
 
 @app.route('/shopping_list/add', methods=["POST"])
 def add_product():
@@ -29,14 +32,16 @@ def add_product():
         and data["quantity"] > 0 and isinstance(data["unitPrice"], (int, float)) 
         and data["unitPrice"] > 0):
             #create product and save to the list
-            product = {
-                "productName": data["productName"],
-                "quantity": data["quantity"],
-                "unitPrice": data["unitPrice"]
-            }
-
-            shopping_list.append(product)
-            return jsonify({"message": "Product successfully registered.", "product": product}), 201
+            try:
+                # Insert the product into the Supabase table
+                result = supabase.table('products').insert([{
+                    "productName": data["productName"],
+                    "quantity": data["quantity"],
+                    "unitPrice": data["unitPrice"]
+                }]).execute()
+                return jsonify({"message": "Product successfully registered.", "data": result.data}), 201
+            except Exception as e:
+                return jsonify({"message": f"Failed to insert product: {str(e)}"}), 500
     return jsonify({"message": "Invalid product data"}), 400
 
 

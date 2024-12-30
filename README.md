@@ -4,7 +4,7 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
 
 ## Requisitos
 
-- Python 3.7 ou superior
+- Python 3.12 ou superior
 - Flask
 - Supabase
 - python-dotenv

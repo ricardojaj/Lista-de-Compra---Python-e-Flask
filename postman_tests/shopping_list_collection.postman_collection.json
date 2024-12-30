@@ -24,7 +24,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"productName\": \"Arroz\",\r\n  \"quantity\": 2,\r\n  \"unitPrice\": 20.99\r\n}",
+					"raw": "{\r\n  \"productName\": \"Ração\",\r\n  \"quantity\": 1,\r\n  \"unitPrice\": 53.49\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,6 +78,31 @@
 					"path": [
 						"shopping_list",
 						"view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/shopping_list/delete/10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"shopping_list",
+						"delete",
+						"10"
 					]
 				}
 			},

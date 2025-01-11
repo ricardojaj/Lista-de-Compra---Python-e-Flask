@@ -14,7 +14,7 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/ricardojaj/Lista-de-Compra---Python-e-Flask.git
    cd seu-repositorio
    ```
 
@@ -38,7 +38,7 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
    python app.py
    ```
 
-2. Acesse a API em `http://127.0.0.1:5000`.
+2. Acesse a API
 
 ## Endpoints
 

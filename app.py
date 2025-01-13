@@ -44,7 +44,7 @@ def add_product():
                 return jsonify({"message": f"Failed to insert product: {str(e)}"}), 500
     return jsonify({"message": "Invalid product data"}), 400
 
-@app.route('/api/shopping_list/delete/<int:product_id>', methods=["DELETE"])
+@app.route('/shopping_list/delete/<int:product_id>', methods=["DELETE"])
 def delete_product(product_id):
     product = supabase.table("products").select("*").eq("id", product_id).execute()
     if product.data:
@@ -53,6 +53,7 @@ def delete_product(product_id):
         return jsonify({"message": "Product deleted successfully!"}), 200
     else:
         return jsonify({"message": "Product not found!"}), 404
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

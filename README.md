@@ -15,7 +15,7 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
 
    ```bash
    git clone https://github.com/ricardojaj/Lista-de-Compra---Python-e-Flask.git
-   cd seu-repositorio
+   cd Lista-de-Compra---Python-e-Flask
    ```
 
 2. Crie um ambiente virtual e ative-o:
@@ -48,9 +48,15 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
 - **Método:** `GET`
 - **Descrição:** Retorna todos os produtos na lista de compras.
 
+### Adicionar Produto
+
+- **URL:** `/shopping_list/add`
+- **Método:** `POST`
+- **Descrição:** Adicionar um produto na lista de compras pelo `product_id`.
+
 ### Deletar Produto
 
-- **URL:** `/api/shopping_list/delete/<int:product_id>`
+- **URL:** `/shopping_list/delete/<int:product_id>`
 - **Método:** `DELETE`
 - **Descrição:** Deleta um produto da lista de compras pelo `product_id`.
 
@@ -76,3 +82,18 @@ Este é um projeto de uma API de Lista de Compras utilizando Python e Flask, com
   }
 ]
 ```
+
+# Testes
+
+Este projeto inclui testes unitários para garantir o correto funcionamento das principais funcionalidades. Para executar os testes, siga os passos abaixo.
+
+1. Execute os testes
+
+   ```bash
+   pytest
+   ```
+
+Os testes de API foram criados no Postman e estão disponíveis na pasta postman_tests/. Para executá-los:
+
+1. Importe a coleção do Postman (postman_tests/shopping_list_collection.json) no Postman
+2. Execute os testes pelo próprio Postman.
